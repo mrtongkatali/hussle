@@ -62,6 +62,7 @@ module.exports = {
         $: "jquery",
         jQuery: "jquery",
         "window.jQuery": "jquery",
+        "_": "lodash",
       }),
   ],
   devtool: '#eval-source-map',
