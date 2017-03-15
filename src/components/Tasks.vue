@@ -9,7 +9,6 @@
         div.list-items(v-for="e in myArray", :class="{'drag-start': isDragging, 'drag-stop': !isDragging}") {{ e.name}}
 </template>
 
-
 <script>
   import draggable from 'npm/vuedraggable';
 
