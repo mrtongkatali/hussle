@@ -1,17 +1,32 @@
 {
-  "name": "antiproscratination-app-demo",
+  "name": "Hussle",
   "version": "1.0.0",
   "description": "A sample anti-procrastination app using vue.js",
   "author": "Leo Diaz <leo.diaz@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --progress --compress --watch-poll",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vue": "^2.2.4"
+  },
   "devDependencies": {
-    "http-server": "^0.9.0"
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.0",
+    "babel-preset-latest": "^6.24.0",
+    "cross-env": "^3.2.4",
+    "css-loader": "^0.27.3",
+    "file-loader": "^0.10.1",
+    "http-server": "^0.9.0",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.14.0",
+    "url-loader": "^0.5.8",
+    "vue-loader": "^11.1.4",
+    "vue-template-compiler": "^2.2.4",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.2"
   },
   "engines": {
     "node": ">= 4.0.0",
