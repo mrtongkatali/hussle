@@ -1,1 +1,10 @@
-.deadline-blocks { border:1px solid green; }
+
+
+.task-component {
+
+  >.task-list { padding-top:30px;}
+  >.task-list .list-items {height:30px; border:1px solid blue; }
+
+  .drag-start {cursor:move;}
+  .drag-stop {cursor:default;}
+}

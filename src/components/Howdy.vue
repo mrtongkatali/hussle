@@ -49,7 +49,7 @@
 
       //- Fetch existing local data when this component has been initialized
       let session = this.$localStorage.get('user')
-      
+
       this.hasSession = (!_.isEmpty(session.username) && !_.isUndefined(session.username) ? true : false);
 
       if(this.hasSession) this.username = session.username;

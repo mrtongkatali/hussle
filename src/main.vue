@@ -1,7 +1,7 @@
 <template lang="pug">
   .container#app
     howdy
-    //-tasks(v-if="hasSession", :username="username")
+    tasks
 </template>
 
 
@@ -20,6 +20,6 @@
     components: {
       Howdy,
       Tasks
-    }
+    },
   }
 </script>
