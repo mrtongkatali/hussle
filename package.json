@@ -1,0 +1,25 @@
+{
+  "name": "antiproscratination-app-demo",
+  "version": "1.0.0",
+  "description": "A sample anti-procrastination app using vue.js",
+  "author": "Leo Diaz <leo.diaz@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "node build/dev-server.js",
+    "build": "node build/build.js",
+    "lint": "eslint --ext .js,.vue src"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
