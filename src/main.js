@@ -1,64 +1,47 @@
 'use strict';
 
 import Vue from 'vue';
+import App from './main.vue';
+import 'assets/style.scss';
 
-Vue.component('task', {
-  props: ['title','body'],
-  template: `
-    <div>
-      <h3>{{ title }}</h3>
-      <ul>
-        <li v-for="name in items"> {{ name.title }}</li>
-      </ul>
-    </div>
-  `,
+// Vue.component('', {
+//   data() {
+//       return {
+//         opened1: false
+//       };
+//   },
+//   methods: {
+//     close1: () => {
+//       this.opened1 = false;
+//     }
+//   },
+//
+// });
+//
+// let app = new Vue({
+//   el: '#root',
+//   data: {
+//     opened1: "works!"
+//   },
+//   methods: {
+//     add: function(event) {
+//       this.$emit('testEmit');
+//     },
+//     close1: function() {
+//       this.opened1 = false;
+//     }
+//   },
+//
+//   computed: {
+//     reversedMessage: function() {
+//       return "computed";
+//     }
+//   },
+//
+// });
 
-  data() {
-      return {
-        items: [
-          {id: 1, title: "Leo Diaz"},
-          {id: 2, title: "Olive Diaz"},
-          {id: 1, title: "Lexandra Diaz"}
-        ],
-      };
-  },
-
-  methods: {
-    hideTest: function() {
-
-    }
-  }
-
-});
 
 let app = new Vue({
   el: '#root',
-  data: {
-    test_title: "Testing title from js",
-    username: "test",
-    isVisible: true,
-  },
-  methods: {
-    add: function(event) {
-      //alert(this.username + " " + event);
-      //this.isVisible = false;
-
-      this.$emit('testEmit');
-    }
-  },
-
-  computed: {
-    reversedMessage: function() {
-      return "computed";
-    }
-  },
-
-  mounted() {
-
-  },
-
-});
-
-app.$on('testEmit',() => {
-  alert(1);
+  render: h => h(App)
 });

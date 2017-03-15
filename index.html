@@ -10,21 +10,10 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 
+
   <body>
 
-    <div id="root" class="container">
-       <!-- Page Content goes here -->
-       <h3> What is your name? </h3>
-       <input type="text" v-model="username">
-       <a class="waves-effect waves-light btn-large" @click="add(1)" :title="test_title">Create</a>
-
-       <task v-if="isVisible" title="This is the title" @close="isVisible = false"></task>
-
-       <br/>
-       <br/>
-       <a @click="add(1)" >Close</a>
-
-     </div>
+    <div id="root" class="container"></div>
 
     <script src="/dist/build.js"></script>
   </body>

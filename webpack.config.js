@@ -24,7 +24,6 @@ module.exports = {
             'scss': 'vue-style-loader!css-loader!sass-loader',
             'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
           }
-          // other vue-loader options go here
         }
       },
       {
@@ -38,13 +37,17 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
-      }
+      },
+      { test: /\.woff(\d*)\??(\d*)$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader?sourceMap"}
     ]
   },
   resolve: {
     alias: {
-      'vue$' : 'vue/dist/vue.esm.js',
-      'npm'  : basePath('node_modules')
+      'vue$'        : 'vue/dist/vue.esm.js',
+      'npm'         : basePath('node_modules'),
+      'assets'      : basePath('src/assets'),
+      'components'  : basePath('src/components')
     }
   },
   devServer: {
@@ -54,6 +57,13 @@ module.exports = {
   performance: {
     hints: false
   },
+  plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery",
+      }),
+  ],
   devtool: '#eval-source-map',
   cache: true
 };

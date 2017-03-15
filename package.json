@@ -2,13 +2,14 @@
   "name": "Hussle",
   "version": "1.0.0",
   "description": "A sample anti-procrastination app using vue.js",
-  "author": "Leo Diaz <leo.diaz@gmail.com>",
+  "author": "Leo Diaz <leo.diaz@crazyapp.cloud>",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --progress --compress --watch-poll",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "jquery": "^2.2.0",
     "vue": "^2.2.4"
   },
   "devDependencies": {
@@ -20,10 +21,12 @@
     "file-loader": "^0.10.1",
     "http-server": "^0.9.0",
     "node-sass": "^4.5.0",
+    "pug": "^2.0.0-beta11",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.14.0",
     "url-loader": "^0.5.8",
     "vue-loader": "^11.1.4",
+    "vue-style-loader": "^2.0.3",
     "vue-template-compiler": "^2.2.4",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.2"
