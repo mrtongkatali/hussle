@@ -32,6 +32,7 @@ Install the dependencies then run `npm run dev`
 
 ```sh
 $ git clone https://github.com/mrtongkatali/hussle.git huzzl
+$ cd huzzl
 $ npm install
 $ npm run dev
 ```
