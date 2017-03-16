@@ -42,3 +42,5 @@ Verify the app by hitting this url:
 ```sh
 http://localhost:8080
 ```
+
+### [Demo](http://huzzl.crazyapp.cloud/)
