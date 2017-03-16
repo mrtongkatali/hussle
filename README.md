@@ -4,12 +4,12 @@
 Huzzl is an app that will bug you to finish your deliverables (specially when you're procrastinating) by sending you ~~annoying~~ notifications about your deadlines for today, from time to time. Though it still under heavy development, there will be a lot of ~~annoying~~ cool features soon!
 
 ### Todos for v1:
-[x] Base app structure
-[x] User Creation
-[x] Task Creation
-[ ] Adding / Updating task details (e.g Motivational Image, Time limits)
-[ ] Completing / Deleting tasks
-[ ] Desktop Notifications
+- [x] Base app structure
+- [x] User Creation
+- [x] Task Creation
+- [ ] Adding / Updating task details (e.g Motivational Image, Time limits)
+- [ ] Completing / Deleting tasks
+- [ ] Desktop Notifications
 
 ### Tech
 
