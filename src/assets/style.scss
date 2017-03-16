@@ -1,4 +1,33 @@
+/* -- CUSTOM CSS -- */
 
+html, body{
+	height: 100%;
+}
+body {
+	background-color:#fafafa;
+	position: relative;
+}
+
+.reg-form {
+	position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+	left: 0 !important;
+	right: 0 !important;
+
+	.btn {
+		width: 100%;
+	}
+	.card-title + .row {
+		margin-bottom: 0;
+	}
+}
+.add-btn-wrapper {
+	height: 72px;
+}
+[v-cloak] {
+  display: none;
+}
 
 .task-component {
 
