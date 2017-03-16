@@ -29,7 +29,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -39,8 +39,10 @@ module.exports = {
         }
       },
       { test: /\.woff(\d*)\??(\d*)$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-      { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader?sourceMap"}
-    ]
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader"},
+      { test: /\.scss$/, loader: "style-loader!css-loader!sass-loader?sourceMap"},
+      { test: /\.css$/, loader: "style-loader!css-loader!sass-loader?sourceMap"}
+    ],
   },
   resolve: {
     alias: {
