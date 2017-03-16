@@ -1,4 +1,4 @@
-<template lang="pug">
+<template lang="pug", v-cloak>
   div.task-component
     div.message
       h3 What is your deadliest deadline today?

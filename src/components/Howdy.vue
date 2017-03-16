@@ -1,8 +1,8 @@
-<template lang="pug">
+<template lang="pug", v-cloak>
   div
     div(v-if="!hasSession")
-      h3 Howdy, What's your name?
-      input(type="text", v-model="username")
+      h3 Howdy, Slacker! What's your name?
+      input(type="text", v-model="username",  @keyup.enter="submit")
       button.waves-effect.waves-light.btn(v-on:click="createUser") Let's Go!
 
     div(v-if="hasSession")
@@ -12,6 +12,9 @@
 
 
 <script>
+
+  import Tasks from './Tasks.vue';
+
   export default {
     name: 'howdy',
     data () {
@@ -26,26 +29,28 @@
        * Register user
       */
       createUser: function() {
-        let profile  = {
-          "username": this.username
-        };
-
-        this.$localStorage.set('user', profile);
         this.hasSession = true;
+
+        // When user is created, emit event to update the global user session flag
+        this.$emit('createUser', {
+          "username": this.username
+        });
       },
 
       /*
        * Clear localstorage data
       */
       logout: function() {
-        this.username = undefined;
-        this.$localStorage.remove('user');
+        this.username   = undefined;
         this.hasSession = false;
+
+        // When user signs out, emit event to update the global user session flag
+        this.$emit('signOut',{});
       }
 
     },
 
-    mounted() {
+    created() {
 
       //- Fetch existing local data when this component has been initialized
       let session = this.$localStorage.get('user')
