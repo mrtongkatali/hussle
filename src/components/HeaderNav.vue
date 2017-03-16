@@ -24,7 +24,7 @@
        * Clear localstorage data
       */
       logout: function() {
-        this.username   = undefined;
+        this.username   = "";
         this.hasSession = false;
 
         // When user signs out, emit event to update the global user session flag

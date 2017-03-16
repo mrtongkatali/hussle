@@ -14,7 +14,7 @@ body {
 
 
 .nav-component {
-	nav.navigation {background-color:#2bbbad;}
+	nav.navigation {background-color:#2196F3;}
 }
 
 .howdy-component {
@@ -41,8 +41,7 @@ body {
 
 .task-component {
 
-  >.task-list { padding-top:30px;}
-  >.task-list .list-items {height:30px; border:1px solid blue; }
+	.task-list .card-content {min-height:350px;}
 
 	.deadline-title {font-size:40px;}
 
@@ -50,4 +49,11 @@ body {
   .drag-stop {cursor:default;}
 
 	.strike {color:red; text-decoration: line-through;}
+
+	.collection .collection-item {padding:10px 0px 10px 10px;}
+	.item-block {cursor:move;}
+	.item-block >.title-area, .item-block >.action-area {float:left; cursor:pointer;}
+	.item-block >.title-area { width: 85%; }
+	.item-block >.action-area { width: 15%; }
+	.clear {clear:both;}
 }

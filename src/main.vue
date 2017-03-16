@@ -18,7 +18,6 @@
       return {
         hasUserData: false,
         user: undefined,
-        opened1: false
       }
     },
     methods: {
@@ -30,9 +29,6 @@
         this.$localStorage.set('user', profile);
         this.hasUserData = true;
       },
-      open1: function() {
-        $('#modal1').modal('open');
-      }
     },
     created: function() {
       //- Fetch existing local data when this component has been initialized
@@ -47,10 +43,6 @@
       HeaderNav
     },
     mounted() {
-      $(document).ready(function(){
-        //$('.modal').modal();
-        //$('.collapsible').collapsible();
-      });
     }
   }
 </script>
