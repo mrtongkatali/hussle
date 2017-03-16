@@ -7,6 +7,7 @@ Huzzl is an app that will bug you to finish your deliverables (specially when yo
 - [x] Base app structure
 - [x] User Creation
 - [x] Task Creation
+- [x] Changing of task position (Drag)
 - [ ] Adding / Updating task details (e.g Motivational Image, Time limits)
 - [ ] Completing / Deleting tasks
 - [ ] Desktop Notifications
