@@ -65,6 +65,7 @@ module.exports = {
         jQuery: "jquery",
         "window.jQuery": "jquery",
         "_": "lodash",
+        "moment": "moment"
       }),
   ],
   devtool: '#eval-source-map',
