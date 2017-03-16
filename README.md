@@ -32,7 +32,7 @@ Huzzl requires [Node.js](https://nodejs.org/) v6+ to run.
 Install the dependencies then run `npm run dev`
 
 ```sh
-$ git clone https://github.com/mrtongkatali/hussle.git huzzl
+$ git clone https://github.com/mrtongkatali/huzzl.git
 $ cd huzzl
 $ npm install
 $ npm run dev
