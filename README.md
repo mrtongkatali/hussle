@@ -23,7 +23,7 @@ Huzzl uses a number of open source projects to work properly:
 * [WebPack](https://webpack.github.io/) - The module bundler
 * [PUG](https://pugjs.org/api/getting-started.html) - Developer and html's bestfriend. Takes care of the templates.
 * [jQuery](https://jquery.com/) - duh.
-* [HTML5 Local Storage] - Currently, data is only saved on local storage. API available soon!
+* [HTML5 Local Storage](https://github.com/pinguinjkeke/vue-local-storage) - Currently, data is only saved on local storage. API available soon!
 
 ### Installation
 
