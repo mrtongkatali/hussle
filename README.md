@@ -1,7 +1,7 @@
 # [Huzzl](http://huzzl.crazyapp.cloud/)
 ##### /ˈhʌs(ə)l/ - App that beats procrastination
 
-Huzzl is an app that will bug you to finish your deliverables (specially when you're procrastinating) by sending you ~~annoying~~ notifications about your deadlines for today, from time to time. Though it still under heavy development, there will be a lot of ~~annoying~~ cool features soon!
+Huzzl is an app that will bug you to finish your deliverables (specially when you're procrastinating) by sending you ~~annoying~~ notifications about your deadlines for today, from time to time. Though it is still under heavy development, there will be a lot of ~~annoying~~ cool features soon!
 
 ### Todos for v1:
 - [x] Base app structure
