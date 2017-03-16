@@ -1,12 +1,16 @@
 <template lang="pug">
-  .container#app
-      howdy(v-on:signOut="onSignOut", v-on:createUser="onCreateUser")
-      tasks(v-if="hasUserData")
+  div#app
+      div.header(v-if="hasUserData")
+        header-nav(v-on:signOut="onSignOut")
+      div.container
+        howdy(v-if="!hasUserData", v-on:createUser="onCreateUser")
+        tasks(v-if="hasUserData")
 </template>
 
 <script>
   import Howdy from './components/Howdy.vue';
   import Tasks from './components/Tasks.vue';
+  import HeaderNav from './components/HeaderNav.vue';
 
   export default {
     name: 'app',
@@ -39,7 +43,8 @@
     },
     components: {
       Howdy,
-      Tasks
+      Tasks,
+      HeaderNav
     },
     mounted() {
       $(document).ready(function(){

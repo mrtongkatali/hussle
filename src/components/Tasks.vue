@@ -1,12 +1,19 @@
 <template lang="pug", v-cloak>
-  div.task-component
-    div.message
-      h3 What is your deadliest deadline today?
-      button.waves-effect.waves-light.btn() Create One
-
-    div.task-list
-      draggable.dragArea(:list="myArray", :move="dragStart", @end="dragStop")
-        div.list-items(v-for="e in myArray", :class="{'drag-start': isDragging, 'drag-stop': !isDragging}") {{ e.name}}
+  div.row.task-component
+    div(class="col s12 m12 l12")
+      h4.center.deadline-title What's your #[span.strike deadliest] deadline today?
+  //- br
+  //- br
+  //- br
+  //- br
+  //- div.task-component
+  //-   div.message
+  //-     h3 What is your deadliest deadline today?
+  //-     button.waves-effect.waves-light.btn() Create One
+  //-
+  //-   div.task-list
+  //-     draggable.dragArea(:list="myArray", :move="dragStart", @end="dragStop")
+  //-       div.list-items(v-for="e in myArray", :class="{'drag-start': isDragging, 'drag-stop': !isDragging}") {{ e.name}}
 </template>
 
 <script>

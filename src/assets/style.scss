@@ -8,25 +8,35 @@ body {
 	position: relative;
 }
 
-.reg-form {
-	position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-	left: 0 !important;
-	right: 0 !important;
-
-	.btn {
-		width: 100%;
-	}
-	.card-title + .row {
-		margin-bottom: 0;
-	}
-}
-.add-btn-wrapper {
-	height: 72px;
-}
 [v-cloak] {
   display: none;
+}
+
+
+.nav-component {
+	nav.navigation {background-color:#2bbbad;}
+}
+
+.howdy-component {
+
+	.huzz-title {line-height:10px; padding-top:20px;}
+	.huzz-pronounce {font-size:13px; font-style: italic;}
+
+	.reg-form {
+		position: absolute !important;
+	  top: 50%;
+	  transform: translateY(-50%);
+		left: 0 !important;
+		right: 0 !important;
+
+		.btn {
+			width: 100%;
+		}
+		.card-title + .row {
+			margin-bottom: 0;
+		}
+	}
+
 }
 
 .task-component {
@@ -34,6 +44,10 @@ body {
   >.task-list { padding-top:30px;}
   >.task-list .list-items {height:30px; border:1px solid blue; }
 
+	.deadline-title {font-size:40px;}
+
   .drag-start {cursor:move;}
   .drag-stop {cursor:default;}
+
+	.strike {color:red; text-decoration: line-through;}
 }
