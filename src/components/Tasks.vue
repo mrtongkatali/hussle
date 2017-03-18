@@ -5,22 +5,23 @@
         h4.center.deadline-title What's your #[span.strike deadliest] deadline today?
         input.validate.center(type="text", placeholder="Enter your task here...",  @keyup.enter="onCreateTask", v-model="taskTitle")
 
-        draggable.dragArea.collection(v-if="hasTaskList", :list="taskList")
-          div.collection-item(v-for="e in taskList", :title="itemElTitle")
-            div.item-block.teal-text
-              div.title-area
-                span.teal-text() {{ e.title }}
-              div.action-area
-                span.time {{ getFormattedDate(e.timestamp) }}
-            div.clear
+        draggable.dragArea.collection(:list="taskList", @end="onEnd")
+          transition-group
+            div.collection-item(v-for="(e, key) in taskList", :title="key", :key="key")
+              div.item-block.teal-text
+                div.title-area
+                  span.teal-text() {{ e.title }}
+                div.action-area
+                  span.time {{ getFormattedDate(e.timestamp) }}
+              div.clear
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex';
   import draggable from 'npm/vuedraggable';
 
   export default {
     name: 'tasks',
-    props: ['username'],
     data() {
       return {
         taskList: [],
@@ -33,39 +34,33 @@
         let taskDetails = {
           title: this.taskTitle,
           description: "",
-          image: "",
+          imageURL: "",
           isCompleted: false,
           timestamp: moment.now()
         };
 
-        this.taskList.push(taskDetails);
         this.taskTitle = "";
 
-        let session = this.$localStorage.get('user');
-        session.taskList = this.taskList;
-        this.$localStorage.set('user', session);
+        this.$store.dispatch('createTask', taskDetails);
+      },
+
+      onEnd: function() {
+        this.$store.dispatch('arrangeTask', this.taskList);
       },
 
       getFormattedDate: function(ts) {
         return moment(ts).fromNow()
       }
     },
-    computed: {
-      hasTaskList: function() {
-        return (_.isEmpty(this.taskList) ? false : true);
-      },
-
-    },
+    computed: mapGetters({
+      allTaskList: 'getAllTasks',
+    }),
     components: {
       draggable
     },
-    created() {
-
-      //- Fetch existing local data when this component has been initialized
-      let session   = this.$localStorage.get('user')
-      if( !_.isEmpty(session.taskList) && !_.isUndefined(session.taskList) ) {
-        this.taskList = session.taskList;
-      }
+    created: function() {
+      this.taskList = this.allTaskList;
     }
+
   }
 </script>

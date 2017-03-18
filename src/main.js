@@ -9,21 +9,10 @@ import 'npm/materialize-css/sass/materialize.scss';
 
 import Vue from 'vue';
 import App from './main.vue';
-import VueLocalStorage from 'vue-localstorage';
-
-Vue.use(VueLocalStorage);
-
-let localStorageObject = {
-  user: {
-    type: Object,
-    default: {
-      profile: {},
-    }
-  }
-};
+import store from './store/index';
 
 let app = new Vue({
   el: '#root',
-  localStorage: localStorageObject,
+  store,
   render: h => h(App),
 });

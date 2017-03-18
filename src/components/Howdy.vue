@@ -17,6 +17,7 @@
 
 <script>
 
+  import { mapGetters } from 'vuex';
   import Tasks from './Tasks.vue';
 
   export default {
@@ -24,40 +25,23 @@
     data () {
       return {
         username: "",
-        hasSession: "false",
       }
     },
     methods: {
-
       /*
        * Register user
       */
       createUser: function() {
 
         if(!_.isEmpty(this.username.trim())) {
-          this.hasSession = true;
 
-          // When user is created, emit event to update the global user session flag
-          this.$emit('createUser', {
-            "username": this.username
-          });
+          this.$store.dispatch('registerNewUser', { username: this.username });
         } else {
           alert('Hey! Don\'t miss it! I\'ts just a one field.');
         }
 
       }
     },
-
-    created() {
-
-      //- Fetch existing local data when this component has been initialized
-      let session = this.$localStorage.get('user')
-
-      this.hasSession = (!_.isEmpty(session.username) && !_.isUndefined(session.username) ? true : false);
-
-      if(this.hasSession) this.username = session.username;
-
-    }
 
   }
 </script>

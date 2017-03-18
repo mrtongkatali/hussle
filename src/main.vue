@@ -1,13 +1,16 @@
 <template lang="pug">
   div#app
-      div.header(v-if="hasUserData")
-        header-nav(v-on:signOut="onSignOut")
+      div.header(v-if="hasSession")
+        header-nav()
       div.container
-        howdy(v-if="!hasUserData", v-on:createUser="onCreateUser")
-        tasks(v-if="hasUserData")
+        howdy(v-if="!hasSession")
+        tasks(v-if="hasSession")
 </template>
 
 <script>
+
+  import { mapGetters, mapActions } from 'vuex';
+
   import Howdy from './components/Howdy.vue';
   import Tasks from './components/Tasks.vue';
   import HeaderNav from './components/HeaderNav.vue';
@@ -20,29 +23,14 @@
         user: undefined,
       }
     },
-    methods: {
-      onSignOut: function() {
-        this.$localStorage.remove('user');
-        this.hasUserData = false;
-      },
-      onCreateUser: function(profile) {
-        this.$localStorage.set('user', profile);
-        this.hasUserData = true;
-      },
-    },
-    created: function() {
-      //- Fetch existing local data when this component has been initialized
-      let session = this.$localStorage.get('user')
-      this.hasUserData = (!_.isEmpty(session.username) && !_.isUndefined(session.username) ? true : false);
-      if(this.hasSession) this.username = session.username;
-
-    },
+    computed: mapGetters({
+      user: 'getUserInfo',
+      hasSession: 'hasSession'
+    }),
     components: {
       Howdy,
       Tasks,
       HeaderNav
-    },
-    mounted() {
     }
   }
 </script>
