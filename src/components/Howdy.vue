@@ -11,7 +11,7 @@
               input.validate.center(type="text", v-model="username",  @keyup.enter="createUser", placeholder="Enter your name here")
           div.row
             div.col.l8.offset-l2
-              button.waves-effect.waves-light.btn(v-on:click="createUser") Let's Go!
+              button.blue.waves-effect.waves-light.btn(v-on:click="createUser") Let's Go!
 </template>
 
 

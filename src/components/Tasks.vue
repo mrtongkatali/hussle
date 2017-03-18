@@ -2,18 +2,23 @@
   div.row.task-component
     div(class="col s12 m12 l12")
       div.task-content
-        h4.center.deadline-title What's your #[span.strike deadliest] deadline today?
-        input.validate.center(type="text", placeholder="Enter your task here...",  @keyup.enter="onCreateTask", v-model="taskTitle")
-
-        draggable.dragArea.collection(:list="taskList", @end="onEnd")
-          transition-group
-            div.collection-item(v-for="(e, key) in taskList", :title="key", :key="key")
-              div.item-block.teal-text
-                div.title-area
-                  span.teal-text() {{ e.title }}
-                div.action-area
-                  span.time {{ getFormattedDate(e.timestamp) }}
-              div.clear
+        div.row
+          div(class="col s12 m12 l12")
+            h4.center.deadline-title What's your #[span.strike deadliest] deadline today?
+        div.row
+          div(class="col s12 m12 l12")
+            input.validate.center(type="text", placeholder="Add your deadline here then hit 'Enter'!",  @keyup.enter="onCreateTask", v-model="taskTitle")
+          div(class="col s12 m12 l12")
+            draggable.dragArea.collection(:list="taskList")
+              transition-group
+                div.collection-item(v-for="(e, key) in taskList", :title="itemElTitle", :key="key")
+                  div.item-block.white-text
+                    div.title-area
+                      span.white-text() {{ e.title }}
+                    div.action-area
+                      span.time {{ getFormattedDate(e.timestamp) }}
+                  div.clear
+                  div.details Lorem ipsum
 </template>
 
 <script>
