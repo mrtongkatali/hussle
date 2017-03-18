@@ -17,13 +17,11 @@ Huzzl is an app that will bug you to finish your deliverables (specially when yo
 
 Huzzl uses a number of open source projects to work properly:
 
-* [VueJS 2](https://vuejs.org/) - Awesome Javascript library!
+* [VueJS / Vuex](https://vuejs.org/) - Awesome Javascript library!
 * [Materialize](http://materializecss.com/) - Another AWESOME UI framework!
 * [Atom](https://atom.io/) - My favorite editor so far
 * [WebPack](https://webpack.github.io/) - The module bundler
 * [PUG](https://pugjs.org/api/getting-started.html) - Developer and html's bestfriend. Takes care of the templates.
-* [jQuery](https://jquery.com/) - duh.
-* [HTML5 Local Storage](https://github.com/pinguinjkeke/vue-local-storage) - Currently, data is only saved on local storage. API available soon!
 
 ### Installation
 
