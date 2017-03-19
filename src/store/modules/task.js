@@ -17,17 +17,13 @@ const actions = {
     });
 
   },
-  arrangeTask: ({commit, state}, array) => {
-
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        commit('arrangeTask', array);
-        resolve();
-      }, 500);
-      
-    });
-
-  },
+  arrangeTask: ({commit, state}, array) => commit('arrangeTask', array),
+  // arrangeTask: ({commit, state}, array) => {
+  //   return new Promise((resolve, reject) => {
+  //       commit('arrangeTask', array);
+  //       resolve();
+  //   });
+  // },
   refreshTaskList: ({commit, state}, array) => commit('refreshTaskList', array)
 };
 

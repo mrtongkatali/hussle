@@ -53,9 +53,12 @@
       },
 
       onEnd: function() {
-        this.$store.dispatch('arrangeTask', this.taskList).then(() => {
-          this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
-        });
+        // this.$store.dispatch('arrangeTask', this.taskList).then(() => {
+        //   this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
+        // });
+
+        this.$store.dispatch('arrangeTask', this.taskList)
+        this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
       },
 
       getFormattedDate: function(ts) {
