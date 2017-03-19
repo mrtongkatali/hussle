@@ -20,8 +20,11 @@ const actions = {
   arrangeTask: ({commit, state}, array) => {
 
     return new Promise((resolve, reject) => {
-      commit('arrangeTask', array);
-      resolve();
+      setTimeout(() => {
+        commit('arrangeTask', array);
+        resolve();
+      }, 500);
+      
     });
 
   },
