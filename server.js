@@ -14,11 +14,11 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket) {
 
-  let send = function(EVENT_NAME, obj) {
-    let conn = __.filter(connections, (conn) => conn.id == obj.username)[0];
+  let send = function(EVENT_NAME, username, obj) {
+    let conn = __.filter(connections, (conn) => conn.id == username)[0];
     // send to all user socket connection
     console.log("EVENT_NAME", EVENT_NAME, conn);
-    __.map( (conn ? conn.connections : []) , (conn) => socket.broadcast.to(conn).emit(EVENT_NAME) );
+    __.map( (conn ? conn.connections : []) , (conn) => socket.broadcast.to(conn).emit(EVENT_NAME, obj) );
   };
 
   console.log("Connected to socket");
@@ -31,18 +31,22 @@ io.on('connection', function(socket) {
     //- Push new connection if it doesn't exists
     if(conn) conn.connections.push(socket.id);
 
+    console.log("Socket connection : ", conn, username);
+
   });
 
   socket.on('_SOCK_LOGOUT', (user) => {
-    send('_SOCK_LOGOUT', {username:user});
+    send('_SOCK_LOGOUT', user);
   });
 
-  socket.on('_SOCK_UPDATE_TASK_LIST', (user) => {
-    send('_SOCK_UPDATE_TASK_LIST', {username:user});
+  socket.on('_SOCK_UPDATE_TASK_LIST', (user, obj) => {
+    send('_SOCK_UPDATE_TASK_LIST', user, obj);
   });
 
   //- Register new socket
   socket.on('_SOCK_REGISTER_USER', function(username){
+
+    console.log("Socket register: ", username);
     connections.push({
       id: username,
       connections: [socket.id]
