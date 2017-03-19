@@ -19,8 +19,14 @@
     computed: mapGetters({
       user: 'getUserInfo',
     }),
-    methods: mapActions([
-      'logout'
-    ])
+    methods: {
+      logout: function() {
+        this.$socket.emit('_SOCK_LOGOUT', this.user.username);
+        this.$store.dispatch('logout');
+      }
+    },
+    created: function() {
+      this.$socket.emit('mapCurrentSession', this.user.username);
+    }
   }
 </script>

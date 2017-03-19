@@ -35,7 +35,10 @@
 
         if(!_.isEmpty(this.username.trim())) {
 
-          this.$store.dispatch('registerNewUser', { username: this.username });
+          this.$store.dispatch('registerNewUser', { username: this.username }).then(() => {
+            this.$socket.emit('_SOCK_REGISTER_USER', this.username);
+          });
+
         } else {
           alert('Hey! Don\'t miss it! I\'ts just a one field.');
         }
