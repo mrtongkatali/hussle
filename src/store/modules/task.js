@@ -13,6 +13,7 @@ const actions = {
   arrangeTask: ({commit, state}, array) => commit('arrangeTask', array)
 };
 
+
 const mutations = {
   createTask(state, p) {
     state.taskItems.push({

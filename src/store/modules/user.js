@@ -3,7 +3,7 @@
 const state = {
   user: {
     hasSession: false,
-  },
+  }
 };
 
 const getters = {
@@ -12,7 +12,13 @@ const getters = {
 };
 
 const actions = {
-  registerNewUser: ({ commit, state }, obj) => commit('createUser', obj),
+  registerNewUser: ({ commit, state }, obj) => {
+    return new Promise((resolve, reject) => {
+      commit('createUser', obj);
+      resolve();
+    });
+
+  },
   logout: ({commit, state}) => commit('removeUserSession')
 };
 
