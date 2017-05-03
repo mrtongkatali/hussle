@@ -16,10 +16,6 @@
 
 
 <script>
-
-  import { mapGetters } from 'vuex';
-  import Tasks from './Tasks.vue';
-
   export default {
     name: 'howdy',
     data () {

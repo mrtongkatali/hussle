@@ -5,6 +5,9 @@
       div.container
         howdy(v-if="!hasSession")
         tasks(v-if="hasSession")
+
+      template(v-if="$route.matched.length", v-cloak)
+        router-view
 </template>
 
 <script>
