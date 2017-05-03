@@ -1,11 +1,11 @@
 <template lang="pug", v-cloak>
-  div.row.howdy-component
+  div.row.registration-form-component
     div.col.s12.m8.offset-m2.l8.offset-l2.card.reg-form
       h2.blue-text.center.huzz-title HU#[span.blue-text.text-lighten-3 ZZ]L
       h2.huzz-pronounce.center /ˈhʌs(ə)l/ - app that beats procrastination
       div.center
         div.card-content
-          h5 Howdy, slacker! What's your name?
+          h5 Howdy, slacker! What's your name1?
           div.row
             div.input-field.col.l8.offset-l2
               input.validate.center(type="text", v-model="username",  @keyup.enter="createUser", placeholder="Enter your name here")
@@ -14,33 +14,15 @@
               button.blue.waves-effect.waves-light.btn(v-on:click="createUser") Let's Go!
 </template>
 
-
 <script>
   export default {
-    name: 'howdy',
-    data () {
+    name: 'registration-form',
+    props: ['username'],
+    data() {
       return {
-        username: "",
+        pageTitle: "This is the registration form page"
       }
     },
-    methods: {
-      /*
-       * Register user
-      */
-      createUser: function() {
-
-        if(!_.isEmpty(this.username.trim())) {
-
-          this.$store.dispatch('registerNewUser', { username: this.username }).then(() => {
-            this.$socket.emit('_SOCK_REGISTER_USER', this.username);
-          });
-
-        } else {
-          alert('Hey! Don\'t miss it! I\'ts just a one field.');
-        }
-
-      }
-    },
-
+    methods: {},
   }
 </script>

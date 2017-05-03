@@ -9,6 +9,8 @@ import 'npm/materialize-css/sass/materialize.scss';
 
 import App from './main.vue'
 import About from './components/about.vue'
+import RegistrationForm from './components/registration/form.vue'
+import Home from './components/home/home.vue'
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -24,7 +26,8 @@ const router = new VueRouter({
   mode:'history',
   routes: [
     {path: '/reg/:username', component: About, props: true},
-    {path: '/reg', component: About}
+    {path: '/registration', component: RegistrationForm },
+    {path: '', component: Home }
   ]
 });
 
