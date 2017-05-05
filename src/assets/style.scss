@@ -46,8 +46,32 @@ textarea.materialize-textarea {
 	nav.navigation {background-color: #0d47a1;}
 }
 
-.home-component {
+.tooltip {
+	display: none;
+	opacity: 0;
+	transition: opacity .15s;
+	pointer-events: none;
+	padding: 4px;
+	z-index: 10000;
 
+	.tooltip-content {
+		background: black;
+		color: white;
+		border-radius: 16px;
+		padding: 5px 10px 4px;
+	}
+
+	&.tooltip-open-transitionend {
+		display: block;
+	}
+
+	&.tooltip-after-open {
+		opacity: 1;
+		color: red !important;
+	}
+}
+
+.home-component {
 	.huzz-title {line-height:10px; padding-top:20px;}
 	.huzz-pronounce {font-size:13px; font-style: italic;}
 
@@ -66,16 +90,21 @@ textarea.materialize-textarea {
 		}
 	}
 
-	.card-content {
-		.txt-username, .row { 
+	.card-content.form {
+		input[type="text"], .row { 
 			margin-bottom: 0px;
 		}
-
+		
 		div.create-account {
 			margin-top:5px;
 		}
 	}
+
+	.field-error {
+		border: 1px solid red !important;
+	}
 }
+
 
 .task-component {
 
