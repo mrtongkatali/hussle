@@ -49,7 +49,8 @@ module.exports = {
       'vue$'        : 'vue/dist/vue.esm.js',
       'npm'         : basePath('node_modules'),
       'assets'      : basePath('src/assets'),
-      'components'  : basePath('src/components')
+      'components'  : basePath('src/components'),
+      'services'    : basePath('src/services')
     }
   },
   devServer: {
