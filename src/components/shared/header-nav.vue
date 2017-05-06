@@ -1,5 +1,6 @@
 <template lang="pug", v-cloak>
-  div.row.nav-component(v-if="hasSession")
+  //div.row.nav-component(v-if="hasSession")
+  div.row.nav-component(v-if="false")
     div(class="s12 l12")
       nav.navigation
         div.container
@@ -18,7 +19,7 @@
     name: 'header-nav',
     computed: mapGetters({
       user: 'getUserInfo',
-      hasSession: 'hasSession'
+      //hasSession: 'hasSession'
     }),
     methods: {
       logout: function() {

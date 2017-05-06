@@ -1,7 +1,7 @@
 <template lang="pug">
   div#app
       div.header
-        header-nav()
+        //header-nav()
       div.container
         //- tasks(v-if="hasSession")
 
@@ -14,22 +14,22 @@
   import { mapGetters, mapActions } from 'vuex'
   import Tasks from './components/Tasks.vue'
   import HeaderNav from './components/shared/header-nav.vue'
+  import Spinner from 'vue-simple-spinner'
 
   export default {
     name: 'app',
     data() {
       return {
-        hasUserData: false,
         user: undefined,
       }
     },
     computed: mapGetters({
       user: 'getUserInfo',
-      hasSession: 'hasSession'
     }),
     components: {
       HeaderNav,
-      Tasks
+      Tasks,
+      Spinner
     }
   }
 </script>

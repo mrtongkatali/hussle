@@ -21,10 +21,10 @@ export default new Vuex.Store({
     users,
     task
   },
-  // plugins: [createPersist({
-  //   namespace: '_huzzl_',
-  //   initialState: {},
-  //   // ONE DAY
-  //   expires: 1 * 24 * 60 * 60 * 1e3
-  // })]
+  plugins: [createPersist({
+    namespace: '_huzzl_',
+    initialState: {},
+    // ONE DAY in millisec
+    expires: 86400000
+  })]
 })
