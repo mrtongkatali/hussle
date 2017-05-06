@@ -20,6 +20,7 @@
     "v-tooltip": "^1.1.6",
     "vue": "^2.2.4",
     "vue-router": "^2.4.0",
+    "vue-simple-spinner": "^1.2.1",
     "vue-socket.io": "^2.1.0",
     "vuedraggable": "^2.9.0",
     "vuex": "^2.2.1",
@@ -46,7 +47,8 @@
     "vue-style-loader": "^2.0.3",
     "vue-template-compiler": "^2.2.4",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.2"
+    "webpack-dev-server": "^2.4.2",
+    "webpack-material-design-icons": "^0.1.0"
   },
   "engines": {
     "node": ">= 4.0.0",
