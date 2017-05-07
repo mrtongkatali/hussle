@@ -9,27 +9,24 @@ import 'npm/materialize-css/sass/materialize.scss'
 import 'npm/material-design-icons/iconfont/material-icons.css'
 
 import App from './main.vue'
-import Home from './components/home/home.vue'
-
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import store from './store/index'
+
+import router from './routers'
+import store from './store'
 import sockets from './sockets'
 
 import VTooltip from 'v-tooltip'
 import VueSocketio from 'vue-socket.io'
 
+const sample_config = {
+  foo : "bar",
+  bar : "foo"
+}
+
+Vue.config.huzzl = sample_config
+
 Vue.use(VueSocketio, 'http://localhost:3000', store)
-Vue.use(VueRouter)
 Vue.use(VTooltip)
-
-
-const router = new VueRouter({
-  mode:'history',
-  routes: [
-    { path: '', component: Home }
-  ]
-});
 
 let app = new Vue({
   sockets,
