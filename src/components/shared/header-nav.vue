@@ -1,6 +1,5 @@
 <template lang="pug", v-cloak>
-  //div.row.nav-component(v-if="hasSession")
-  div.row.nav-component(v-if="false")
+  div.row.nav-component(v-if="user.info")
     div(class="s12 l12")
       nav.navigation
         div.container
@@ -8,7 +7,7 @@
             a.brand-logo() Huzzl
 
             ul#nav-mobile.right.hide-on-med-and-down
-              li: a() Hi, {{ user.username }}
+              li: a() Hi, {{ user.info.first_name }}
               li: a(@click="logout") Sign Out
 </template>
 
@@ -19,11 +18,10 @@
     name: 'header-nav',
     computed: mapGetters({
       user: 'getUserInfo',
-      //hasSession: 'hasSession'
     }),
     methods: {
       logout: function() {
-        this.$socket.emit('_SOCK_LOGOUT', this.user.username);
+        //this.$socket.emit('_SOCK_LOGOUT', this.user.username);
         this.$store.dispatch('logout');
       }
     },

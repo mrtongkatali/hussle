@@ -8,18 +8,24 @@
         div.center
           div.card-content.form
             h5 Howdy, Slacker!
+
+            label.warning-msg.error(v-if="loginCallback") {{ loginCallback }}
+
             div.row
               div.input-field.col.l8.offset-l2
-                input.validate.center(type="text", v-model="username",  @keyup.enter="createUser", placeholder="Email address")
+                input.validate.center(type="text", v-model="username",  @keyup.enter="signIn", placeholder="Email address")
             div.row
               div.input-field.col.l8.offset-l2
-                input.validate.center(type="password", v-model="password",  @keyup.enter="createUser", placeholder="Password")
+                input.validate.center(type="password", v-model="password",  @keyup.enter="signIn", placeholder="Password")
             div.row
               div.col.l8.offset-l2
-                button.blue.waves-effect.waves-light.btn(v-on:click="signIn") Sign In
+                button.blue.waves-effect.waves-light.btn(v-on:click="signIn", :disabled="signingIn")
+                  span Sign In
+                  spinner.btn-loading(size="tiny", v-if="signingIn")
+
             div.row.create-account
               div.col.l8.offset-l2
-                button.red.lighten-1.waves-effect.waves-light.btn(v-on:click="showRegistrationForm") Create an account
+                button.red.lighten-1.waves-effect.waves-light.btn(v-on:click="showRegistrationForm", :disabled="signingIn") Create an account
                 
       div.registration(v-if="showRegistration")
         registration-form
@@ -27,31 +33,74 @@
 
 
 <script>
-  import { mapGetters, mapActions } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex'
   import RegistrationForm from './registration-form.vue'
+  import UserService from 'services/auth'
+  import Spinner from 'vue-simple-spinner'
 
   export default {
     name: 'home',
     data () {
       return {
         username: "",
-        password: ""
+        password: "",
+        loginCallback: "",
+        signingIn: false,
       }
     },
     methods: {
-      signIn() {
-        alert("Sign In")
+      async signIn() {
+
+        if(_.isEmpty(this.username) || _.isEmpty(this.password) ) {
+          this.onLoginError("Please enter your email address and password.")
+          return
+        }
+
+        try {
+
+          this.signingIn = true;
+
+          let params = {
+            "username" : this.username,
+            "password" : this.password
+          }
+
+          let user = await UserService.login(params)
+
+          if (user.isSuccessful) {
+            this.onLoginSuccess(user.message)
+          } else {
+            this.onLoginError(user.message)
+          }
+
+        } catch(error) {
+          this.onLoginError(error)
+        }
+        
       },
 
       showRegistrationForm() {
         this.$store.dispatch('showRegistrationForm', true)
+      },
+
+      onLoginSuccess(message) {
+        this.signingIn      = false
+        this.loginCallback  = message
+      },
+
+      onLoginError(error) {
+        console.log("ERR", error)
+          
+        this.signingIn      = false
+        this.loginCallback  = error
       }
     },
     computed: mapGetters({
       showRegistration: 'isShowRegistration'
     }),
     components: {
-      RegistrationForm
+      RegistrationForm,
+      Spinner
     }
   }
 </script>

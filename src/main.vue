@@ -1,7 +1,7 @@
 <template lang="pug">
   div#app
       div.header
-        //header-nav()
+        header-nav()
       div.container
         //- tasks(v-if="hasSession")
 

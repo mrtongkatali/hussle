@@ -15,12 +15,13 @@ const actions = {
 
 const mutations = {
   createUser(state, payload) {
-    state.user = payload
+    state.user = {
+      token : payload.token,
+      info  : payload.user 
+    }
   },
   removeUserSession(state, payload) {
-    state.user = {
-      username: ""
-    };
+    state.user = {};
   }
 };
 
