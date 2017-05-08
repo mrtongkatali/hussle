@@ -7,7 +7,7 @@ import createPersist, { createStorage } from 'vuex-localstorage'
 import * as actions from './actions'
 import * as getters from './getters'
 
-import users from './modules/user'
+import auth from './modules/auth'
 import task from './modules/task'
 import home from './modules/home'
 
@@ -17,8 +17,8 @@ export default new Vuex.Store({
   actions,
   getters,
   modules: {
+    auth,
     home,
-    users,
     task
   },
   plugins: [createPersist({

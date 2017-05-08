@@ -22,7 +22,8 @@
     methods: {
       logout: function() {
         //this.$socket.emit('_SOCK_LOGOUT', this.user.username);
-        this.$store.dispatch('logout');
+        this.$store.dispatch('logout')
+        this.$router.push("/login")
       }
     },
     created: function() {

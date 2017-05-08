@@ -45,7 +45,7 @@
         username: "",
         password: "",
         loginCallback: "",
-        signingIn: false,
+        signingIn: false
       }
     },
     methods: {
@@ -67,14 +67,26 @@
 
           let user = await UserService.login(params)
 
+          //- Initialize user and save to details to localstore
+          this.$store.dispatch('initializeUser', { 
+            "token" : user.result.token,
+            "user"  : user.result.user,
+          })
+
           if (user.isSuccessful) {
-            this.onLoginSuccess(user.message)
+
+            // if the huzzle.com/login?redirect=/task exists in the url params, redirect on that url else default : tasks
+            let url = (this.$route.query.redirect ? this.$route.query.redirect : '/tasks')
+            this.$router.push(url)
+
           } else {
             this.onLoginError(user.message)
           }
 
         } catch(error) {
-          this.onLoginError(error)
+
+          console.log("Internal ERROR", error)
+          this.onLoginError("Internal server error. Please try again")
         }
         
       },

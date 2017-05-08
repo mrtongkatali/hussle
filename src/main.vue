@@ -3,8 +3,7 @@
       div.header
         header-nav()
       div.container
-        //- tasks(v-if="hasSession")
-
+      
         template(v-if="$route.matched.length", v-cloak)
           router-view
 </template>
@@ -12,7 +11,6 @@
 <script>
 
   import { mapGetters, mapActions } from 'vuex'
-  import Tasks from './components/Tasks.vue'
   import HeaderNav from './components/shared/header-nav.vue'
   import Spinner from 'vue-simple-spinner'
 
@@ -25,11 +23,14 @@
     },
     computed: mapGetters({
       user: 'getUserInfo',
+      test: 'getHeaders'
     }),
     components: {
       HeaderNav,
-      Tasks,
       Spinner
+    },
+    mounted() {
+      this.hello1()
     }
   }
 </script>

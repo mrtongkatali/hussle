@@ -58,7 +58,6 @@
       */
       async registerNewAccount() {
         
-
         //this.$socket.emit('_SOCK_REGISTER_USER', this.username);
 
         this.isInitialize = true
@@ -87,16 +86,20 @@
 
             delete user.result.user.password
 
-            //- Register user response to localstorage
-            this.$store.dispatch('registerNewUser', { 
-              "token"      : user.result.token,
-              "user"       : user.result.user,
+            //- Initialize user and save to details to localstore
+            this.$store.dispatch('initializeUser', { 
+              "token" : user.result.token,
+              "user"  : user.result.user,
             })
 
             //- Hide the registration form
             this.$store.dispatch('showRegistrationForm', false)
 
             this.onRegistrationSuccess("Successfully created new account.")
+
+            // if the huzzle.com/login?redirect=/task exists in the url params, redirect on that url else default : tasks
+            let url = (this.$route.query.redirect ? this.$route.query.redirect : '/tasks')
+            this.$router.push(url)
 
           } catch (error) {
             console.log("ERRR", error)

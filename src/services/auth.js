@@ -1,8 +1,9 @@
+import config from 'config'
 import axios from 'axios'
 import qs from 'query-string'
+import store from 'store'
 
-//const API_SERVER = "http://localhost:8080"
-const API_SERVER = "https://huzzl-api.herokuapp.com"
+const API_SERVER = config.API_SERVER_URL
 
 let loginHeader = {
     headers: { "Content-Type" : "application/x-www-form-urlencoded" }

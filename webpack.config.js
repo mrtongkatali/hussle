@@ -50,7 +50,9 @@ module.exports = {
       'npm'         : basePath('node_modules'),
       'assets'      : basePath('src/assets'),
       'components'  : basePath('src/components'),
-      'services'    : basePath('src/services')
+      'services'    : basePath('src/services'),
+      'config'      : basePath('src/config'),
+      'store'       : basePath('src/store'),
     }
   },
   devServer: {
