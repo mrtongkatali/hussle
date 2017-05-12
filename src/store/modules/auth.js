@@ -21,8 +21,9 @@ const actions = {
 const mutations = {
   initializeUser(state, payload) {
     state.user = {
-      token : payload.token,
-      info  : payload.user 
+      expires : payload.expires,
+      token   : payload.token,
+      info    : payload.user 
     }
 
     let authorizationHeader = {

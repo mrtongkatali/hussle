@@ -84,29 +84,36 @@
             
             let user = await UserService.register(params)
 
-            delete user.result.user.password
+            if(user.isSuccessful) {
 
-            //- Initialize user and save to details to localstore
-            this.$store.dispatch('initializeUser', { 
-              "token" : user.result.token,
-              "user"  : user.result.user,
-            })
+              delete user.result.user.password
 
-            //- Hide the registration form
-            this.$store.dispatch('showRegistrationForm', false)
+              //- Initialize user and save to details to localstore
+              this.$store.dispatch('initializeUser', { 
+                "token" : user.result.token,
+                "user"  : user.result.user,
+              })
 
-            this.onRegistrationSuccess("Successfully created new account.")
+              //- Hide the registration form
+              this.$store.dispatch('showRegistrationForm', false)
 
-            // if the huzzle.com/login?redirect=/task exists in the url params, redirect on that url else default : tasks
-            let url = (this.$route.query.redirect ? this.$route.query.redirect : '/tasks')
-            this.$router.push(url)
+              this.onRegistrationSuccess("Successfully created new account.")
+
+              // if the huzzle.com/login?redirect=/task exists in the url params, redirect on that url else default : tasks
+              let url = (this.$route.query.redirect ? this.$route.query.redirect : '/tasks')
+              this.$router.push(url)
+
+            } else {
+              this.onRegistrationError(user.message)
+            }
 
           } catch (error) {
-            console.log("ERRR", error)
+            console.log("[Debug] onRegister", error)
             this.onRegistrationError("An error occured. Please try again.")
           }
 
         } else {
+          console.log("[Debug] onRegister", error)
           this.onRegistrationError("Please fill-up all the required fields correctly.")
         }
 

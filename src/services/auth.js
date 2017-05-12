@@ -12,5 +12,6 @@ let loginHeader = {
 export default {
     welcome: () => axios.get(API_SERVER + "/"),
     register: (params) => axios.post(API_SERVER + "/1.0/auth/register", params).then( (data) => data.data ),
-    login: (params) => axios.post(API_SERVER + "/1.0/auth/login", qs.stringify(params), loginHeader).then( (data) => data.data )
+    login: (params) => axios.post(API_SERVER + "/1.0/auth/login", qs.stringify(params), loginHeader).then( (data) => data.data ),
+    logout: (params) => axios.post(API_SERVER + "/1.0/auth/logout", params).then( (data) => data.data )
 }

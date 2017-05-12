@@ -13,6 +13,7 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  import UserService from 'services/auth'
 
   export default {
     name: 'header-nav',
@@ -20,14 +21,33 @@
       user: 'getUserInfo',
     }),
     methods: {
-      logout: function() {
+      async logout() {
         //this.$socket.emit('_SOCK_LOGOUT', this.user.username);
-        this.$store.dispatch('logout')
-        this.$router.push("/login")
+
+        try {
+
+          this.$store.dispatch('logout')
+          this.$router.push("/login")
+
+          let user = await UserService.logout({
+            user_id: this.user.info.id,
+            expires: this.user.expires
+          })
+
+          if(!user.isSuccessful) { console.log("[Debug] ", error) }
+
+        } catch (error) {
+          console.log("[Debug] onLogout", error)
+        }
+
+      },
+
+      onLogoutError(error) {
+        console.log("[Debug] onLogout", error)
       }
     },
     created: function() {
-      this.$socket.emit('mapCurrentSession', this.user.username);
+      //this.$socket.emit('mapCurrentSession', this.user.username);
     }
   }
 </script>

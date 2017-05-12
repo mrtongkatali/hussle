@@ -19,7 +19,6 @@ import config from './config'
 import VTooltip from 'v-tooltip'
 import VueSocketio from 'vue-socket.io'
 
-
 // define a mixin object
 var myMixin = {
   created: function () {

@@ -69,8 +69,9 @@
 
           //- Initialize user and save to details to localstore
           this.$store.dispatch('initializeUser', { 
-            "token" : user.result.token,
-            "user"  : user.result.user,
+            "token"   : user.result.token,
+            "user"    : user.result.user,
+            "expires" : user.result.expires
           })
 
           if (user.isSuccessful) {
