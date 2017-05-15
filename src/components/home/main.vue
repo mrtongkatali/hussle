@@ -67,14 +67,14 @@
 
           let user = await UserService.login(params)
 
-          //- Initialize user and save to details to localstore
-          this.$store.dispatch('initializeUser', { 
-            "token"   : user.result.token,
-            "user"    : user.result.user,
-            "expires" : user.result.expires
-          })
-
           if (user.isSuccessful) {
+
+            //- Initialize user and save to details to localstore
+            this.$store.dispatch('initializeUser', { 
+              "token"   : user.result.token,
+              "user"    : user.result.user,
+              "expires" : user.result.expires
+            })
 
             // if the huzzle.com/login?redirect=/task exists in the url params, redirect on that url else default : tasks
             let url = (this.$route.query.redirect ? this.$route.query.redirect : '/tasks')
@@ -85,8 +85,7 @@
           }
 
         } catch(error) {
-
-          console.log("Internal ERROR", error)
+          console.log("[Debug] INTERNAL_ERROR: ", error)
           this.onLoginError("Internal server error. Please try again")
         }
         
@@ -102,7 +101,7 @@
       },
 
       onLoginError(error) {
-        console.log("ERR", error)
+        console.log("[Debug] onLoginError: ", error)
           
         this.signingIn      = false
         this.loginCallback  = error

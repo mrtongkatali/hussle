@@ -4,7 +4,7 @@
       div.task-content
         div.row
           div(class="col s12 m12 l12")
-            h4.center.deadline-title What&rsquos your #[span.strike deadliest] deadline today?
+            h4.center.deadline-title What&apos;s your #[span.strike deadliest] deadline today?
         div.row
           div(class="col s12 m12 l12")
             input.validate.center(type="text", placeholder="Add your deadline here then hit 'Enter'!",  @keyup.enter="onCreateTask", v-model="taskTitle")
@@ -23,6 +23,7 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
+  import TaskService from 'services/task.service' 
   import draggable from 'npm/vuedraggable';
 
   export default {
@@ -36,23 +37,42 @@
     },
     methods: {
       async onCreateTask() {
-        let taskDetails = {
-          title: this.taskTitle,
-          description: "",
-          imageURL: "",
-          isCompleted: false,
-          timestamp: moment.now()
-        };
 
-        this.taskTitle = "";
+        try {
 
-        this.$store.dispatch('createTask', taskDetails).then(() => {
-          this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.allTaskList);
-        });
+          let params = {
+            "task_title": "1",
+            "task_description": "asfdsdf",
+            "status": 1
+          }
+            
+          let task = await TaskService.createTask(params)
+
+          if (user.isSuccessful) {
+            this.onCreateTaskSuccess(task)
+          } else {
+            this.onCreateTaskError(user.message)
+          }
+
+        } catch(error) {
+          console.log("[Debug] INTERNAL_ERROR: ", error)
+        }
+        
+        // let taskDetails = {
+        //   title: this.taskTitle,
+        //   description: "",
+        //   imageURL: "",
+        //   isCompleted: false,
+        //   timestamp: moment.now()
+        // };
+
+        // this.$store.dispatch('createTask', taskDetails).then(() => {
+        //   this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.allTaskList);
+        // });
 
       },
 
-      onEnd: function() {
+      onEnd() {
         // this.$store.dispatch('arrangeTask', this.taskList).then(() => {
         //   this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
         // });
@@ -61,8 +81,17 @@
         this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
       },
 
-      getFormattedDate: function(ts) {
+      getFormattedDate(ts) {
         return moment(ts).fromNow()
+      },
+      
+      onCreateTaskSuccess(success) {
+        this.taskTitle = "";
+
+        console.log("SUCCESS", success)
+      },
+      onCreateTaskError(error) {
+        console.log("[Debug] onLoginError: ", error)
       }
     },
     computed: mapGetters({
