@@ -13,7 +13,7 @@
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
-  import UserService from 'services/auth'
+  import UserService from 'services/auth.service'
 
   export default {
     name: 'header-nav',
@@ -26,13 +26,13 @@
 
         try {
 
-          this.$store.dispatch('logout')
-          this.$router.push("/login")
-
           let user = await UserService.logout({
             user_id: this.user.info.id,
             expires: this.user.expires
           })
+
+          this.$store.dispatch('logout')
+          this.$router.push("/login")
 
           if(!user.isSuccessful) { console.log("[Debug] ", error) }
 

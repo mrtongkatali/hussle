@@ -35,7 +35,7 @@
 <script>
 
   import { mapGetters, mapActions } from 'vuex';
-  import UserService from 'services/auth'
+  import UserService from 'services/auth.service'
   import Spinner from 'vue-simple-spinner'
 
   export default {
@@ -86,12 +86,11 @@
 
             if(user.isSuccessful) {
 
-              delete user.result.user.password
-
               //- Initialize user and save to details to localstore
               this.$store.dispatch('initializeUser', { 
-                "token" : user.result.token,
-                "user"  : user.result.user,
+                "token"   : user.result.token,
+                "user"    : user.result.user,
+                "expires" : user.result.expires
               })
 
               //- Hide the registration form
@@ -113,7 +112,7 @@
           }
 
         } else {
-          console.log("[Debug] onRegister", error)
+          console.log("[Debug] onRegister: Please fill-up all the required fields correctly.")
           this.onRegistrationError("Please fill-up all the required fields correctly.")
         }
 

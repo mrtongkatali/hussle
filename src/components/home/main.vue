@@ -35,7 +35,7 @@
 <script>
   import { mapGetters, mapActions } from 'vuex'
   import RegistrationForm from './registration-form.vue'
-  import UserService from 'services/auth'
+  import UserService from 'services/auth.service'
   import Spinner from 'vue-simple-spinner'
 
   export default {

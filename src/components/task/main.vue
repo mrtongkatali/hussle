@@ -4,7 +4,7 @@
       div.task-content
         div.row
           div(class="col s12 m12 l12")
-            h4.center.deadline-title What's your #[span.strike deadliest] deadline today?
+            h4.center.deadline-title What&rsquos your #[span.strike deadliest] deadline today?
         div.row
           div(class="col s12 m12 l12")
             input.validate.center(type="text", placeholder="Add your deadline here then hit 'Enter'!",  @keyup.enter="onCreateTask", v-model="taskTitle")
@@ -35,7 +35,7 @@
       }
     },
     methods: {
-      onCreateTask: function() {
+      async onCreateTask() {
         let taskDetails = {
           title: this.taskTitle,
           description: "",
