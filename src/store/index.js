@@ -24,7 +24,7 @@ export default new Vuex.Store({
   plugins: [createPersist({
     namespace: '_huzzl_',
     initialState: {},
-    // ONE DAY in millisec
-    expires: 86400000
+    // 50mins in millisec
+    expires: 3e+6
   })]
 })

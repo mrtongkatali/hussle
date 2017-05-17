@@ -1,11 +1,9 @@
 'use strict';
 
+import axios from 'axios'
+
 const state = {
-  user: {},
-  headers: {
-    "Content-type"  : "application/json",
-    "Cache-Control" : "no-cache"
-  }
+  user: {}
 };
 
 const getters = {
@@ -26,18 +24,12 @@ const mutations = {
       info    : payload.user 
     }
 
-    let authorizationHeader = {
-      "Authorization" : `Bearer ${payload.token}`
-    }
-
-    state.headers = _.assign(authorizationHeader, state.headers)
+    axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`
   },
   removeUserSession(state, payload) {
     state.user    = {}
-    state.headers = {
-      "Content-type"  : "application/json",
-      "Cache-Control" : "no-cache"
-    }
+  
+    delete axios.defaults.headers.common["Authorization"]
   }
 };
 

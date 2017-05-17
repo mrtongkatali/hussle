@@ -87,8 +87,6 @@
       
       onCreateTaskSuccess(success) {
         this.taskTitle = "";
-
-        console.log("SUCCESS", success)
       },
       onCreateTaskError(error) {
         console.log("[Debug] onLoginError: ", error)

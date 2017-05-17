@@ -15,6 +15,7 @@ import router from './routers'
 import store from './store'
 import sockets from './sockets'
 import config from './config'
+import interceptor from './config/axios-interceptor'
 
 import VTooltip from 'v-tooltip'
 import VueSocketio from 'vue-socket.io'

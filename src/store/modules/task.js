@@ -23,15 +23,7 @@ const actions = {
 
 
 const mutations = {
-  createTask(state, p) {
-    state.taskItems.push({
-      title: p.title,
-      description: p.descritpion,
-      imageURL: p.imageURL,
-      isCompleted: false,
-      timestamp: p.timestamp
-    });
-  },
+  createTask(state, p) { },
   arrangeTask(state, taskArray) {
     state.taskItems = taskArray;
   },
