@@ -9,27 +9,30 @@ const getters = {
 };
 
 const actions = {
-  createTask: ({commit, state}, obj) => {
-
-    return new Promise((resolve, reject) => {
-      commit('createTask', obj);
-      resolve();
-    });
-
-  },
+  initializeTasks: ({commit, state}, array) => commit('initializeTasks', array),
+  createTask: ({commit, state}, obj) => commit('pushAnotherTask', obj),
   arrangeTask: ({commit, state}, array) => commit('arrangeTask', array),
-  refreshTaskList: ({commit, state}, array) => commit('refreshTaskList', array)
+  refreshTaskList: ({commit, state}, array) => commit('refreshTaskList', array),
+  clearTaskItems: ({commit, state}) => commit('clearTaskItems'),
 };
 
 
 const mutations = {
-  createTask(state, p) { },
+  initializeTasks(state, array) { 
+    state.taskItems = array
+  },
+  pushAnotherTask(state, obj) {
+    state.taskItems.push(obj)
+  },
   arrangeTask(state, taskArray) {
     state.taskItems = taskArray;
   },
   refreshTaskList(state, taskList) {
     state.taskItems = taskList;
   },
+  clearTaskItems(state) {
+    state.taskItems = {}
+  }
 };
 
 export default {

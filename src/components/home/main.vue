@@ -69,6 +69,9 @@
 
           if (user.isSuccessful) {
 
+            //- Resets the localStorage
+            this.clearLocalStorage();
+
             //- Initialize user and save to details to localstore
             this.$store.dispatch('initializeUser', { 
               "token"   : user.result.token,
@@ -94,12 +97,6 @@
       showRegistrationForm() {
         this.$store.dispatch('showRegistrationForm', true)
       },
-
-      onLoginSuccess(message) {
-        this.signingIn      = false
-        this.loginCallback  = message
-      },
-
       onLoginError(error) {
         console.log("[Debug] onLoginError: ", error)
           

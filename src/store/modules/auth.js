@@ -1,7 +1,5 @@
 'use strict';
 
-import axios from 'axios'
-
 const state = {
   user: {}
 };
@@ -23,13 +21,9 @@ const mutations = {
       token   : payload.token,
       info    : payload.user 
     }
-
-    axios.defaults.headers.common["Authorization"] = `Bearer ${payload.token}`
   },
   removeUserSession(state, payload) {
-    state.user    = {}
-  
-    delete axios.defaults.headers.common["Authorization"]
+    state.user = {}
   }
 };
 

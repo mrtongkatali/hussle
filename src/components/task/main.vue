@@ -9,22 +9,27 @@
           div(class="col s12 m12 l12")
             input.validate.center(type="text", placeholder="Add your deadline here then hit 'Enter'!",  @keyup.enter="onCreateTask", v-model="taskTitle")
           div(class="col s12 m12 l12")
-            draggable.dragArea.collection(:list="taskList", @end="onEnd")
+            div.loading-block(v-if="isLoadingTaskList")
+              spinner.loader(size="small")
+              span.text Fetching all your deadlines
+
+            draggable.dragArea.collection(:list="taskList", @end="onEnd", v-if="!isLoadingTaskList")
               transition-group
                 div.collection-item(v-for="(e, key) in allTaskList", :title="itemElTitle", :key="key")
                   div.item-block.white-text
                     div.title-area
-                      span.white-text() {{ e.title }}
+                      span.white-text() {{ e.task_title }}
                     div.action-area
-                      span.time {{ getFormattedDate(e.timestamp) }}
+                      span.time {{ getFormattedDate(e.date_added) }}
                   div.clear
-                  div.details Task details here....
+                  div.details(v-if="e.task_description") {{ e.task_description }}
 </template>
 
 <script>
   import { mapGetters, mapActions } from 'vuex';
   import TaskService from 'services/task.service' 
-  import draggable from 'npm/vuedraggable';
+  import Draggable from 'npm/vuedraggable';
+  import Spinner from 'vue-simple-spinner'
 
   export default {
     name: 'tasks',
@@ -32,7 +37,8 @@
       return {
         taskList: [],
         taskTitle: "",
-        itemElTitle: "Drag to switch position"
+        itemElTitle: "Drag to switch position",
+        isLoadingTaskList: false
       }
     },
     methods: {
@@ -41,30 +47,24 @@
         try {
 
           let params = {
-            "task_title": "1",
-            "task_description": "asfdsdf",
-            "status": 1
+            "task_title": this.taskTitle,
+            "task_description": "",
+            "status": 1,
+            "sort": 0
           }
             
           let task = await TaskService.createTask(params)
+          this.$store.dispatch('createTask', params)
 
-          if (user.isSuccessful) {
-            this.onCreateTaskSuccess(task)
-          } else {
-            this.onCreateTaskError(user.message)
-          }
+          // if (user.isSuccessful) {
+          //   this.onCreateTaskSuccess(params)
+          // } else {
+          //   this.onCreateTaskError(user.message)
+          // }
 
         } catch(error) {
           console.log("[Debug] INTERNAL_ERROR: ", error)
         }
-        
-        // let taskDetails = {
-        //   title: this.taskTitle,
-        //   description: "",
-        //   imageURL: "",
-        //   isCompleted: false,
-        //   timestamp: moment.now()
-        // };
 
         // this.$store.dispatch('createTask', taskDetails).then(() => {
         //   this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.allTaskList);
@@ -77,16 +77,18 @@
         //   this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
         // });
 
-        this.$store.dispatch('arrangeTask', this.taskList)
-        this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
+        // this.$store.dispatch('arrangeTask', this.taskList)
+        // this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
+
+        console.log("XXX", this.taskList)
       },
 
       getFormattedDate(ts) {
         return moment(ts).fromNow()
       },
       
-      onCreateTaskSuccess(success) {
-        this.taskTitle = "";
+      onCreateTaskSuccess(obj) {
+        this.taskTitle = "";        
       },
       onCreateTaskError(error) {
         console.log("[Debug] onLoginError: ", error)
@@ -97,10 +99,26 @@
       allTaskList: 'getAllTasks',
     }),
     components: {
-      draggable
+      Draggable,
+      Spinner
     },
-    created: function() {
-      this.taskList = this.allTaskList;
+    async created() {
+
+      this.isLoadingTaskList = true
+
+      try {
+        
+        let taskObj = await TaskService.getAllTask({status: 1, page:1, count:10})
+        this.$store.dispatch('initializeTasks', taskObj.result.task)
+
+        this.taskList = this.allTaskList;
+
+        this.isLoadingTaskList = false
+
+      } catch(error) {
+        console.log("[Debug] onGetTaskListError: ", error)
+      }
+
     }
 
   }

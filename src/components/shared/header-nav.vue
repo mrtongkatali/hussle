@@ -25,13 +25,15 @@
         //this.$socket.emit('_SOCK_LOGOUT', this.user.username);
 
         try {
-
+          
           let user = await UserService.logout({
             user_id: this.user.info.id,
             expires: this.user.expires
           })
 
-          this.$store.dispatch('logout')
+          //- Resets the localStorage
+          this.clearLocalStorage();
+          
           this.$router.push("/login")
 
           if(!user.isSuccessful) { console.log("[Debug] ", error) }

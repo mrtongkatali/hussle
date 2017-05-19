@@ -20,14 +20,15 @@ import interceptor from './config/axios-interceptor'
 import VTooltip from 'v-tooltip'
 import VueSocketio from 'vue-socket.io'
 
-// define a mixin object
+// Global mixin object
 var myMixin = {
-  created: function () {
-    //this.hello1()
-  },
   methods: {
     hello1: function () {
       console.log('hello from mixin!')
+    },
+    clearLocalStorage: function() {
+      this.$store.dispatch('logout');
+      this.$store.dispatch('clearTaskItems');
     }
   }
 }
