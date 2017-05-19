@@ -50,17 +50,16 @@
             "task_title": this.taskTitle,
             "task_description": "",
             "status": 1,
-            "sort": 0
+            "sort": this.taskList.length
           }
             
-          let task = await TaskService.createTask(params)
           this.$store.dispatch('createTask', params)
 
-          // if (user.isSuccessful) {
-          //   this.onCreateTaskSuccess(params)
-          // } else {
-          //   this.onCreateTaskError(user.message)
-          // }
+          //- Clear the input field
+          this.taskTitle = "";
+
+          //- save the new task to databse silently
+          let task = await TaskService.createTask(params)
 
         } catch(error) {
           console.log("[Debug] INTERNAL_ERROR: ", error)
@@ -72,43 +71,53 @@
 
       },
 
-      onEnd() {
-        // this.$store.dispatch('arrangeTask', this.taskList).then(() => {
-        //   this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
-        // });
+      async onEnd(evt) {
 
-        // this.$store.dispatch('arrangeTask', this.taskList)
         // this.$socket.emit('_SOCK_UPDATE_TASK_LIST', this.user.username, this.taskList);
 
-        console.log("XXX", this.taskList)
+        //- Update the sorting value
+        _.each([...this.taskList], (value, key) => value.sort = key)
+
+        //- Update the store regarding the new order of tasks
+        this.$store.dispatch('arrangeTask', this.taskList)
+
+        //- Get the index of the moved element
+        let index = evt.newIndex
+        
+        //- Update the params and delete date_added in keys
+        let params = JSON.parse(JSON.stringify(this.taskList[evt.newIndex]))
+        delete params.date_added
+
+        //- Update silently
+        let task = await TaskService.updateTask(params.id, params)
       },
 
       getFormattedDate(ts) {
         return moment(ts).fromNow()
       },
-      
-      onCreateTaskSuccess(obj) {
-        this.taskTitle = "";        
-      },
+
       onCreateTaskError(error) {
         console.log("[Debug] onLoginError: ", error)
       }
     },
+    
     computed: mapGetters({
       user: 'getUserInfo',
       allTaskList: 'getAllTasks',
     }),
+
     components: {
       Draggable,
       Spinner
     },
+
     async created() {
 
       this.isLoadingTaskList = true
 
       try {
         
-        let taskObj = await TaskService.getAllTask({status: 1, page:1, count:10})
+        let taskObj = await TaskService.getAllTask({status: 1, page:1, count:20})
         this.$store.dispatch('initializeTasks', taskObj.result.task)
 
         this.taskList = this.allTaskList;
