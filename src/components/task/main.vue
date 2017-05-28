@@ -8,6 +8,7 @@
         div.row
           div(class="col s12 m12 l12")
             input.validate.center(type="text", placeholder="Add your deadline here then hit 'Enter'!",  @keyup.enter="onCreateTask", v-model="taskTitle")
+
           div(class="col s12 m12 l12")
             div.loading-block(v-if="isLoadingTaskList")
               spinner.loader(size="small")
@@ -15,14 +16,15 @@
 
             draggable.dragArea.collection(:list="taskList", @end="onEnd", v-if="!isLoadingTaskList")
               transition-group
-                div.collection-item(v-for="(e, key) in allTaskList", :title="itemElTitle", :key="key")
+                div.collection-item(v-for="(e, key) in allTaskList", :title="itemElTitle", :key="key", v-on:click="onClickHeader(key)")
                   div.item-block.white-text
                     div.title-area
                       span.white-text() {{ e.task_title }}
                     div.action-area
-                      span.time {{ getFormattedDate(e.date_added) }}
+                      span.time {{ getFormattedDate(e.date_added) }} | delete
                   div.clear
-                  div.details(v-if="e.task_description") {{ e.task_description }}
+                  div.details(v-if="e.isShown") {{ e.task_description }}
+                  
 </template>
 
 <script>
@@ -36,7 +38,9 @@
     data() {
       return {
         taskList: [],
+        cardIsOpen: [],
         taskTitle: "",
+        aa: false,
         itemElTitle: "Drag to switch position",
         isLoadingTaskList: false
       }
@@ -98,6 +102,14 @@
 
       onCreateTaskError(error) {
         console.log("[Debug] onLoginError: ", error)
+      },
+
+      onClickHeader(i) {
+        let value = !this.allTaskList[i].isShown
+
+        //- Dynamically add new properties to object
+        //- This is for hiding and showing of description
+        this.$set(this.allTaskList[i],'isShown', value)
       }
     },
     
@@ -121,6 +133,11 @@
         this.$store.dispatch('initializeTasks', taskObj.result.task)
 
         this.taskList = this.allTaskList;
+
+        //- Initially set the toggle values
+      _.each([...this.taskList], (value, key) => {
+        //this.cardIsOpen[key] = false
+      })
 
         this.isLoadingTaskList = false
 

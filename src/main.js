@@ -8,6 +8,9 @@ import 'npm/materialize-css/bin/materialize.js'
 import 'npm/materialize-css/sass/materialize.scss'
 import 'npm/material-design-icons/iconfont/material-icons.css'
 
+//- Custom
+import 'npm/materialize-css/js/collapsible'
+
 import App from './main.vue'
 import Vue from 'vue'
 
